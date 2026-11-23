@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: events-flask-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: pip install -r requirement.txt
+    startCommand: gunicorn run:app --bind 0.0.0.0:$PORT --workers 1 --timeout 60 --access-logfile - --error-logfile -
+    healthCheckPath: /health
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: PYTHONUNBUFFERED
+        value: "1"
