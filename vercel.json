@@ -1,0 +1,20 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "flask",
+  "buildCommand": "python build.py",
+  "functions": {
+    "server.py": {
+      "excludeFiles": "{**/tests/**,**/__pycache__/**,**/venv/**,**/.venv/**,frontend/design/**,frontend/server.py,**/*.md}"
+    }
+  },
+  "headers": [
+    {
+      "source": "/api/:path*",
+      "headers": [{"key": "Cache-Control", "value": "no-store"}]
+    },
+    {
+      "source": "/(app.js|styles.css)",
+      "headers": [{"key": "Cache-Control", "value": "public, max-age=0, must-revalidate"}]
+    }
+  ]
+}

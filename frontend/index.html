@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0f131c">
+  <meta name="description" content="Discover gatherings, reserve your place, and keep your registrations together.">
+  <title>Gather · Find your next gathering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="header"><div class="header-inner">
+    <a class="brand" href="#/events"><span class="brand-mark" aria-hidden="true">▣</span> GATHER</a>
+    <nav aria-label="Main navigation"><a href="#/events" data-nav="events">Events</a><a href="#/registrations" data-nav="registrations">My registrations</a><a href="#/organizer" data-nav="organizer">Organizer</a></nav>
+    <button class="profile" id="profile-button"><span class="avatar" aria-hidden="true">U</span><span id="profile-label">Set user ID</span></button>
+  </div></header>
+  <main id="main" tabindex="-1"></main>
+  <footer><a class="brand" href="#/events">GATHER</a><span>Bring people together.</span><span>Event registration made simple</span></footer>
+  <dialog id="profile-dialog" aria-labelledby="profile-title">
+    <form id="profile-form"><div class="section-heading"><h2 id="profile-title">Your registration profile</h2><button type="button" class="icon-button" id="close-profile" aria-label="Close">×</button></div>
+      <p>Enter an existing user ID to register for events and find your registrations. This version does not use sign-in.</p>
+      <label for="user-id">User ID</label><input id="user-id" name="userId" required placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" autocomplete="off" spellcheck="false">
+      <p class="muted small">Use the ID from the users table in your database. It is remembered only for this browser session.</p>
+      <p id="profile-error" class="error-text" role="alert"></p><button class="button primary" type="submit">Save profile</button>
+    </form>
+  </dialog>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

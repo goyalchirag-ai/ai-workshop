@@ -1,4 +1,6 @@
-from flask import Flask, jsonify
+from pathlib import Path
+
+from flask import Flask, jsonify, send_from_directory
 
 from app.config import Config
 from app.errors import register_error_handlers
@@ -17,7 +19,6 @@ def create_app(test_config=None):
     app.register_blueprint(registrations_blueprint)
     register_error_handlers(app)
 
-    @app.get("/")
     @app.get("/api", strict_slashes=False)
     def api_index():
         return jsonify({
@@ -40,5 +41,22 @@ def create_app(test_config=None):
     @app.get("/health")
     def health_check():
         return jsonify({"status": "ok"})
+
+    frontend = Path(__file__).resolve().parents[2] / "frontend"
+
+    @app.get("/")
+    def frontend_index():
+        if (frontend / "index.html").is_file():
+            return send_from_directory(frontend, "index.html")
+        return api_index()
+
+    # Local Flask serves these files; Vercel serves the built public/ copies.
+    @app.get("/app.js")
+    def frontend_script():
+        return send_from_directory(frontend, "app.js")
+
+    @app.get("/styles.css")
+    def frontend_styles():
+        return send_from_directory(frontend, "styles.css")
 
     return app

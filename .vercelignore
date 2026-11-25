@@ -1,0 +1,12 @@
+.git
+.env
+.env.*
+**/.env
+**/.env.*
+**/venv
+**/.venv
+**/__pycache__
+**/tests
+frontend/design
+frontend/server.py
+public
